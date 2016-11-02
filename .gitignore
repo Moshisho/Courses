@@ -41,23 +41,23 @@ buildNumber.properties
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff:
-spring-course/.idea/workspace.xml
-spring-course/.idea/tasks.xml
+.idea/workspace.xml
+.idea/tasks.xml
 
 # Sensitive or high-churn files:
-spring-course/.idea/dataSources.ids
-spring-course/.idea/dataSources.xml
-spring-course/.idea/dataSources.local.xml
-spring-course/.idea/sqlDataSources.xml
-spring-course/.idea/dynamic.xml
-spring-course/.idea/uiDesigner.xml
+.idea/dataSources.ids
+.idea/dataSources.xml
+.idea/dataSources.local.xml
+.idea/sqlDataSources.xml
+.idea/dynamic.xml
+.idea/uiDesigner.xml
 
 # Gradle:
-spring-course/.idea/gradle.xml
-spring-course/.idea/libraries
+.idea/gradle.xml
+.idea/libraries
 
 # Mongo Explorer plugin:
-spring-course/.idea/mongoSettings.xml
+.idea/mongoSettings.xml
 
 ## File-based project format:
 *.iws
