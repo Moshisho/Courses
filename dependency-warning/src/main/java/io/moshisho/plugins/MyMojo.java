@@ -60,8 +60,8 @@ public class MyMojo
                 String key = dependency.getGroupId() + ":" + dependency.getArtifactId();
                 if (gaVersion.containsKey(key)) {
                     if (!gaVersion.get(key).equals(dependency.getVersion())) {
-                        System.out.println("[WARNING] !!! duplicate version! for " + key);
-                        System.out.println("[WARNING] !!! duplicate version! already have: " + gaVersion.get(key) + " new: " + dependency.getVersion());
+                        getLog().warn("[WARNING] !!! duplicate version! for " + key);
+                        getLog().warn("[WARNING] !!! duplicate version! already have: " + gaVersion.get(key) + " new: " + dependency.getVersion());
                     }
                 }
                 else
