@@ -1,0 +1,8 @@
+take token from user configuration and get crumb:
+wget -q --auth-no-challenge --http-user admin --http-password <token(UID)> --output-document - ‘http://<JENKINS_IP>:8080/crumbIssuer/api/xml'
+
+with curl POST:
+curl -X POST -H "Jenkins-Crumb:<crumb>" -u "admin:<token>" http://JENKINS_IP:8080/job/api-trigger/build --data 'token=apitrig' --data-urlencode json='{"parameter":[{"name":"FLAG", "value":"true"},{"name":"STR", "value":"API"}]}'
+
+JOBNAME=remote:
+curl -X POST -H "Jenkins-Crumb:4ec2f67004c1206307ef7c291ffb3967" -u "admin1:9c39e783a8e63c2eeb9b19eacbdcc519" http://16.59.53.105:8080/job/remote/build --data 'token=remote' --data-urlencode json='{"parameter":[{"name":"FLAG", "value":"true"},{"name":"STR", "value":"API"}]}'

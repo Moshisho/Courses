@@ -1,0 +1,94 @@
+---------
+Prepare VMs
+-----------
+ 
+In both VMs - centos-small and centos-small_1
+1. in the VM network settings, in each tab,  
+    a. Change mode to "allow all"
+    b. Expand the "advance" and change the MAC addr pressing the "Generate" button
+2. load the machine
+3. login as root/vagrant
+3. get the ip address : "ip addr" - the last inet entry
+4. release the mouse by pressing right-Ctrl + mouse
+
+Note:
+The hostname of both VMs is master but we wil use the ip.
+
+if the ip is the same in both machines do the following in one of the VMs
+dhclient -r 
+Kill current dhclient process
+dhclient 
+
+Use putty.exe (located in the desktop) to connect to each ip. named one as master and the other slave.
+
+
+---------
+master
+-----------
+
+login as root (pass vagrant) into the first machine – master, and perform:
+ 
+export http_proxy=http://16.82.112.30:8080
+export https_proxy=http://16.82.112.30:8080
+
+sed -i 's/enabled=1/enabled=0/' /etc/yum/pluginconf.d/fastestmirror.conf
+
+yum install -y net-tools
+
+wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
+rpm --import https://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key //if https makes a problem, use http
+yum install -y jenkins
+
+cat << EOF > /var/lib/jenkins/proxy.xml
+<?xml version='1.0' encoding='UTF-8'?>
+<proxy>
+  <name>16.82.112.30</name>
+  <port>8080</port>
+  <secretPassword>H1/fM3bEB3hAF0XH1TRPSQ==</secretPassword>
+</proxy>
+EOF
+
+service jenkins start
+
+wait untill /var/log/jenkins/jenkins.log prompt:
+Jenkins is fully up and running
+ 
+---------
+slave
+---------
+
+login as root (pass vagrant) into the second machine – slave, and perform:
+ 
+export http_proxy=http://16.82.112.30:8080
+export https_proxy=http://16.82.112.30:8080
+
+sed -i 's/enabled=1/enabled=0/' /etc/yum/pluginconf.d/fastestmirror.conf
+
+
+yum install -y maven
+ 
+edit /usr/share/maven/conf/settings.xml
+  <proxies>
+    <proxy>
+      <id>optional</id>
+      <active>true</active>
+      <protocol>http</protocol>
+      <host>16.82.112.30</host>
+      <port>8080</port>
+      <nonProxyHosts>local.net|some.host.com</nonProxyHosts>
+    </proxy>
+  </proxies>
+ 
+ 
+-------------- 
+Open browser
+--------------
+
+http://<master ip>:8080/
+ 
+install plugins
+ 
+Install Maven Integration plugin 
+ 
+in http://<master ip>:8080/configureTools/ add Maven installation - /usr/share/maven (disable "install automaticaly")
+ 

@@ -1,0 +1,4 @@
+Rebuilder - after running a job run again with the same parameters.
+Parameterized Trigger Plugin - as the name suggests, pass parameters between jobs.
+Downstream build view - for job running another job view.
+Delivery pipeline plugin - for job running another job view.

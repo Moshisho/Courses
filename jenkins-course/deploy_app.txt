@@ -1,0 +1,6 @@
+In build_app:
+export WAR_NAME=`find . -name *.war | rev | cut -d/ -f1 | rev`
+echo WAR_NAME=${WAR_NAME} > my.properties
+echo WAR_LOCATION=${BUILD_URL}/artifacts/target/${WAR_NAME} > my.properties
+
+In deploy_app:

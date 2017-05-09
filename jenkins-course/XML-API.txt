@@ -1,0 +1,5 @@
+http://16.59.53.105:8080/view/All/api/xml?tree=jobs[name]
+
+depth control: ?depth=1 (default 0 - doesn't show children) 
+
+xpath selection: ?xpath[expression]
